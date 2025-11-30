@@ -1,8 +1,10 @@
+import {linearMove,diagonalMove,forwardMove,forwardTwoStepsMove} from '../utils/pieceMovement';
+
 interface PieceProps {
-    pieceName: string,
-    isFirstPlayerPiece: Boolean,
+    pieceName: string|null,
+    isFirstPlayerPiece: Boolean|null,
     pieceImage: string,
-    position: {row: number,column: number},
+    position: {row: number,column: number}|null,
     moveRules:Function[],
     move: Function,
 }
@@ -12,8 +14,8 @@ const firstPlayerPawn: PieceProps = {
     pieceName: "pawn1",
     isFirstPlayerPiece: true,
     pieceImage: "",
-    position: {row: 1, column: 0},
-    moveRules: [],
+    position: null,
+    moveRules: [forwardMove,forwardTwoStepsMove],
     move: () => {},
 };
 
@@ -21,8 +23,8 @@ const firstPlayerRook: PieceProps = {
     pieceName: "rook1",
     isFirstPlayerPiece: true,
     pieceImage: "",
-    position: {row: 0, column: 0},
-    moveRules: [],
+    position: null,
+    moveRules: [linearMove],
     move: () => {},
 };
 
@@ -30,7 +32,7 @@ const firstPlayerKnight: PieceProps = {
     pieceName: "knight1",
     isFirstPlayerPiece: true,
     pieceImage: "",
-    position: {row: 0, column: 1},
+    position: null,
     moveRules: [],
     move: () => {},
 };
@@ -39,8 +41,8 @@ const firstPlayerBishop: PieceProps = {
     pieceName: "bishop1",
     isFirstPlayerPiece: true,
     pieceImage: "",
-    position: {row: 0, column: 2},
-    moveRules: [],
+    position: null,
+    moveRules: [diagonalMove],
     move: () => {},
 };
 
@@ -48,7 +50,7 @@ const firstPlayerQueen: PieceProps = {
     pieceName: "queen1",
     isFirstPlayerPiece: true,
     pieceImage: "",
-    position: {row: 0, column: 3},
+    position: null,
     moveRules: [],
     move: () => {},
 };
@@ -57,7 +59,7 @@ const firstPlayerKing: PieceProps = {
     pieceName: "king1",
     isFirstPlayerPiece: true,
     pieceImage: "",
-    position: {row: 0, column: 4},
+    position: null,
     moveRules: [],
     move: () => {},
 };
@@ -67,8 +69,8 @@ const secondPlayerPawn: PieceProps = {
     pieceName: "pawn2",
     isFirstPlayerPiece: false,
     pieceImage: "",
-    position: {row: 6, column: 0},
-    moveRules: [],
+    position: null,
+    moveRules: [forwardMove,forwardTwoStepsMove],
     move: () => {},
 };
 
@@ -76,8 +78,8 @@ const secondPlayerRook: PieceProps = {
     pieceName: "rook2",
     isFirstPlayerPiece: false,
     pieceImage: "",
-    position: {row: 7, column: 0},
-    moveRules: [],
+    position: null,
+    moveRules: [linearMove],
     move: () => {},
 };
 
@@ -85,7 +87,7 @@ const secondPlayerKnight: PieceProps = {
     pieceName: "knight2",
     isFirstPlayerPiece: false,
     pieceImage: "",
-    position: {row: 7, column: 1},
+    position: null,
     moveRules: [],
     move: () => {},
 };
@@ -94,7 +96,7 @@ const secondPlayerBishop: PieceProps = {
     pieceName: "bishop2",
     isFirstPlayerPiece: false,
     pieceImage: "",
-    position: {row: 7, column: 2},
+    position: null,
     moveRules: [],
     move: () => {},
 };
@@ -103,7 +105,7 @@ const secondPlayerQueen: PieceProps = {
     pieceName: "queen2",
     isFirstPlayerPiece: false,
     pieceImage: "",
-    position: {row: 7, column: 3},
+    position: null,
     moveRules: [],
     move: () => {},
 };
@@ -112,16 +114,16 @@ const secondPlayerKing: PieceProps = {
     pieceName: "king2",
     isFirstPlayerPiece: false,
     pieceImage: "",
-    position: {row: 7, column: 4},
+    position: null,
     moveRules: [],
     move: () => {},
 };
 
 const nonePiece: PieceProps = {
-    pieceName: "none",
-    isFirstPlayerPiece: false,
+    pieceName: null,
+    isFirstPlayerPiece: null,
     pieceImage: "",
-    position: {row: 0, column: 0},
+    position: null,
     moveRules: [],
     move: () => {},
 };

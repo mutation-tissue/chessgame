@@ -128,4 +128,37 @@ function forwardTwoStepsMove(field:PieceProps[][],row:number,column:number,isfir
     
     
 }
-export {linearMove, diagonalMove,forwardMove,forwardTwoStepsMove}
+
+function kingMovement(field:PieceProps[][],row:number, column:number){
+    const result:{row:number,column:number}[] = []
+
+    const directions = [
+        [0,1],
+        [0,-1],
+        [1,0],
+        [-1,0],
+        [1,1],
+        [1,-1],
+        [-1,1],
+        [-1,-1]
+    ]
+    try {
+        for (const [dx, dy] of directions){
+            if(0<= row+dy && 0 <= column+dx && row+dy < field.length && column+dx < field[0].length){
+                if(field[row+dy][column+dx].pieceName === null){
+                    result.push({row: row+dy,column: column+dx});
+                } else {
+                    continue;
+                }
+            } else {
+                continue;
+            }
+        }
+    } catch {
+        console.log("out of range");
+        return [];
+    }
+    return result
+}
+
+export {linearMove, diagonalMove,forwardMove,forwardTwoStepsMove,kingMovement}

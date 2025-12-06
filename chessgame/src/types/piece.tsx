@@ -1,4 +1,4 @@
-import {linearMove,diagonalMove,forwardMove,forwardTwoStepsMove} from '../utils/pieceMovement';
+import {linearMove,diagonalMove,forwardMove,forwardTwoStepsMove,kingMovement} from '../utils/pieceMovement';
 
 interface PieceProps {
     pieceName: string|null,
@@ -60,7 +60,7 @@ const firstPlayerKing: PieceProps = {
     isFirstPlayerPiece: true,
     pieceImage: "",
     position: null,
-    moveRules: [],
+    moveRules: [kingMovement],
     move: () => {},
 };
 
@@ -115,7 +115,7 @@ const secondPlayerKing: PieceProps = {
     isFirstPlayerPiece: false,
     pieceImage: "",
     position: null,
-    moveRules: [],
+    moveRules: [kingMovement],
     move: () => {},
 };
 

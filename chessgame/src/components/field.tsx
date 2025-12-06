@@ -23,6 +23,8 @@ function Field({ field}: { field: PieceProps[][]}) {
     function showMovableFiled(moveRules:Function[], row:number,column:number){
         const allresult:{row:number,column:number}[] = []
 
+        console.log(moveRules);
+
         moveRules.forEach(moveRule => {
             const result = moveRule(field,row,column,isFirstPlayerTurn);
             allresult.push(...result);

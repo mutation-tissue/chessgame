@@ -42,8 +42,52 @@ function linearMove(field:PieceProps[][],row:number,column:number){
     return result;
 }
 
-function diagonalMove(field:PieceProps[][]){
-    return [];
+function diagonalMove(field:PieceProps[][],row:number,column:number){
+    const result:{row:number, column:number}[] = []
+
+    try{
+        //右下で移動できるマスがあるか確認
+        for (let i = 1; row+i < field.length  && column+i < field[0].length; i++){
+            if (field[row+i][column+i].pieceName === null){
+                result.push({row: row+i,column: column+i});
+            } else {
+                break;
+            }
+        }
+
+        //右上の移動
+        for (let i = 1; 0 <= row-i  && column+i < field[0].length; i++){
+            if (field[row-i][column+i].pieceName === null){
+                result.push({row: row-i,column: column+i});
+            } else {
+                break;
+            }
+        }
+
+        //左下の移動
+        for (let i = 1; row+i < field.length  && 0 <= column-i; i++){
+            if (field[row+i][column-i].pieceName === null){
+                result.push({row: row+i,column: column-i});
+            } else {
+                break;
+            }
+        }
+        //左上の移動
+        for (let i = 1; 0 <= row-i  && 0 <= column-i; i++){
+            if (field[row-i][column-i].pieceName === null){
+                result.push({row: row-i,column: column-i});
+            } else {
+                break;
+            }
+        }
+        
+    } catch {
+        console.log(`row ${row} column ${column}`)
+        console.log("out of range");
+        return [];
+    }
+
+    return result;
 }
 
 function forwardMove(field:PieceProps[][],row:number,column:number,isfirstPlayerTurn:boolean){

@@ -51,7 +51,7 @@ const firstPlayerQueen: PieceProps = {
     isFirstPlayerPiece: true,
     pieceImage: "",
     position: null,
-    moveRules: [],
+    moveRules: [linearMove,diagonalMove],
     move: () => {},
 };
 
@@ -97,7 +97,7 @@ const secondPlayerBishop: PieceProps = {
     isFirstPlayerPiece: false,
     pieceImage: "",
     position: null,
-    moveRules: [],
+    moveRules: [diagonalMove],
     move: () => {},
 };
 
@@ -106,7 +106,7 @@ const secondPlayerQueen: PieceProps = {
     isFirstPlayerPiece: false,
     pieceImage: "",
     position: null,
-    moveRules: [],
+    moveRules: [linearMove,diagonalMove],
     move: () => {},
 };
 

@@ -1,10 +1,8 @@
-function SideMenu() {
-    function initialize() {
-        console.log("initialize")
-    }
+function SideMenu({initialize}: {initialize: Function}) {
+
     return (
         <div>
-            <button onClick={initialize}>initialize</button>
+            <button onClick={()=>initialize()}>initialize</button>
             <h1>SideMenu(added history)</h1>
         </div>
     );

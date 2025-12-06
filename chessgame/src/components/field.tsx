@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 
 
-function Field({ field}: { field: (PieceProps|PawnProps)[][]}) {
+function Field({ field,takePiece}: { field: (PieceProps|PawnProps)[][],takePiece:Function}) {
 
     const [clickPosition,setClickPosition] = useState<{ row: number, column: number } | null>(null);
     const [movalePosition,setMovablePosition] = useState<{ row: number, column: number }[] | null>(null);
@@ -15,14 +15,11 @@ function Field({ field}: { field: (PieceProps|PawnProps)[][]}) {
         console.log(`move from ${clickPosition?.row} : ${clickPosition?.column} to ${row}:${column}`);
 
         //駒を動かす
-        [field[clickPosition!.row][clickPosition!.column], field[row][column]] = [field[row][column],field[clickPosition!.row][clickPosition!.column]]
-    
+        takePiece(field,row,column,clickPosition?.row,clickPosition?.column)
+        
         setClickPosition(null);
         setMovablePosition(null);
 
-        if(field[row][column].pieceName == "pawn"){
-            (field[row][column] as PawnProps).ismove = true
-        }
         
         setIsFirstPalyerTurn(!isFirstPlayerTurn)
     }

@@ -17,17 +17,31 @@ import {
     secondPlayerKing
   } from '../types/piece.tsx';
 import {useState} from 'react'
-import type {PieceProps} from '../types/piece'
+import type {PawnProps, PieceProps} from '../types/piece'
 
 
 function gameController() {
     
-    const [field,setfield] = useState<PieceProps[][]>(()=>initializeField());
+    const [field, setfield] = useState<(PieceProps | PawnProps)[][]>(() => initializeField());
 
+    function takePiece(filed:(PieceProps|PawnProps)[][],torow:number, tocolumn:number, fromrow:number, fromcolumn:number){
+        const newField = filed.map(row => [...row]);
+        newField[torow][tocolumn] = nonePiece;
+        [newField[fromrow][fromcolumn], newField[torow][tocolumn]] = [newField[torow][tocolumn],newField[fromrow][fromcolumn]];
+    
+        console.log(`${newField[fromrow][fromcolumn].pieceName}, ${newField[torow][tocolumn].pieceName}`)
+        
+        if(newField[torow][tocolumn].pieceName == "pawn"){
+            (newField[torow][tocolumn] as PawnProps).ismove = true
+            console.log("change")
+        }
+
+        setfield(newField)
+    }
 
     function initializeField() {
         // 8x8の2次元配列を初期化（各行が独立した配列になるように）
-        const field: (PieceProps)[][] = Array(8).fill(null).map(() => Array(8).fill(nonePiece));
+        const field: (PieceProps|PawnProps)[][] = Array(8).fill(null).map(() => Array(8).fill(nonePiece));
         
         // 白の駒を配置 (row 0-1)
         // 1行目（バックランク）
@@ -84,6 +98,7 @@ function gameController() {
             />
             <Field
                 field = {field}
+                takePiece = {takePiece}
             />
         </div>
     )

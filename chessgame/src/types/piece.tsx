@@ -1,4 +1,4 @@
-import {linearMove,diagonalMove,forwardMove,forwardTwoStepsMove,kingMovement,knightMovement} from '../utils/pieceMovement';
+import {linearMove,diagonalMove,forwardMove,kingMovement,knightMovement} from '../utils/pieceMovement';
 
 interface PieceProps {
     pieceName: string|null,
@@ -9,18 +9,23 @@ interface PieceProps {
     move: Function,
 }
 
+interface PawnProps extends PieceProps{
+    ismove: boolean
+}
+
 // 1st Player Pieces
-const firstPlayerPawn: PieceProps = {
-    pieceName: "pawn1",
+const firstPlayerPawn: PawnProps = {
+    pieceName: "pawn",
     isFirstPlayerPiece: true,
     pieceImage: "",
     position: null,
-    moveRules: [forwardMove,forwardTwoStepsMove],
+    moveRules: [forwardMove],
     move: () => {},
+    ismove: false
 };
 
 const firstPlayerRook: PieceProps = {
-    pieceName: "rook1",
+    pieceName: "rook",
     isFirstPlayerPiece: true,
     pieceImage: "",
     position: null,
@@ -29,7 +34,7 @@ const firstPlayerRook: PieceProps = {
 };
 
 const firstPlayerKnight: PieceProps = {
-    pieceName: "knight1",
+    pieceName: "knight",
     isFirstPlayerPiece: true,
     pieceImage: "",
     position: null,
@@ -38,7 +43,7 @@ const firstPlayerKnight: PieceProps = {
 };
 
 const firstPlayerBishop: PieceProps = {
-    pieceName: "bishop1",
+    pieceName: "bishop",
     isFirstPlayerPiece: true,
     pieceImage: "",
     position: null,
@@ -47,7 +52,7 @@ const firstPlayerBishop: PieceProps = {
 };
 
 const firstPlayerQueen: PieceProps = {
-    pieceName: "queen1",
+    pieceName: "queen",
     isFirstPlayerPiece: true,
     pieceImage: "",
     position: null,
@@ -56,7 +61,7 @@ const firstPlayerQueen: PieceProps = {
 };
 
 const firstPlayerKing: PieceProps = {
-    pieceName: "king1",
+    pieceName: "king",
     isFirstPlayerPiece: true,
     pieceImage: "",
     position: null,
@@ -65,17 +70,18 @@ const firstPlayerKing: PieceProps = {
 };
 
 // 2nd Player Pieces
-const secondPlayerPawn: PieceProps = {
-    pieceName: "pawn2",
+const secondPlayerPawn: PawnProps = {
+    pieceName: "pawn",
     isFirstPlayerPiece: false,
     pieceImage: "",
     position: null,
-    moveRules: [forwardMove,forwardTwoStepsMove],
+    moveRules: [forwardMove],
     move: () => {},
+    ismove: false,
 };
 
 const secondPlayerRook: PieceProps = {
-    pieceName: "rook2",
+    pieceName: "rook",
     isFirstPlayerPiece: false,
     pieceImage: "",
     position: null,
@@ -84,7 +90,7 @@ const secondPlayerRook: PieceProps = {
 };
 
 const secondPlayerKnight: PieceProps = {
-    pieceName: "knight2",
+    pieceName: "knight",
     isFirstPlayerPiece: false,
     pieceImage: "",
     position: null,
@@ -93,7 +99,7 @@ const secondPlayerKnight: PieceProps = {
 };
 
 const secondPlayerBishop: PieceProps = {
-    pieceName: "bishop2",
+    pieceName: "bishop",
     isFirstPlayerPiece: false,
     pieceImage: "",
     position: null,
@@ -102,7 +108,7 @@ const secondPlayerBishop: PieceProps = {
 };
 
 const secondPlayerQueen: PieceProps = {
-    pieceName: "queen2",
+    pieceName: "queen",
     isFirstPlayerPiece: false,
     pieceImage: "",
     position: null,
@@ -111,7 +117,7 @@ const secondPlayerQueen: PieceProps = {
 };
 
 const secondPlayerKing: PieceProps = {
-    pieceName: "king2",
+    pieceName: "king",
     isFirstPlayerPiece: false,
     pieceImage: "",
     position: null,
@@ -127,7 +133,7 @@ const nonePiece: PieceProps = {
     moveRules: [],
     move: () => {},
 };
-export type { PieceProps };
+export type { PieceProps,PawnProps };
 
 export {
     nonePiece,

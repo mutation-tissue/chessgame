@@ -161,4 +161,36 @@ function kingMovement(field:PieceProps[][],row:number, column:number){
     return result
 }
 
-export {linearMove, diagonalMove,forwardMove,forwardTwoStepsMove,kingMovement}
+function knightMovement(field:PieceProps[][],row:number,column:number){
+    const result:{row: number, column:number}[] = []
+
+    const directions = [
+        [-2,1],
+        [-1,2],
+        [1,2],
+        [2,1],
+        [1,-2],
+        [2,-1],
+        [-1,-2],
+        [-2,-1]
+    ]
+
+    for(const [dx,dy] of directions){
+        try {
+            if(0 <= row+dy && row+dy < field.length && 0 <= column+dx && column+dx < field.length){
+                if(field[row+dy][column+dx].pieceName === null){
+                    result.push({row: row+dy,column: column+dx})
+                }
+            } else {
+                continue
+            }
+        } catch {
+            return []
+        }
+    }
+
+    return result
+
+}
+
+export {linearMove, diagonalMove,forwardMove,forwardTwoStepsMove,kingMovement,knightMovement}

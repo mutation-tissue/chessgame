@@ -3,7 +3,7 @@ import {linearMove,diagonalMove,forwardMove,kingMovement,knightMovement} from '.
 interface PieceProps {
     pieceName: string|null,
     isFirstPlayerPiece: Boolean|null,
-    pieceImage: string,
+    pieceImage: string | null,
     position: {row: number,column: number}|null,
     moveRules:Function[],
     move: Function,
@@ -17,7 +17,7 @@ interface PawnProps extends PieceProps{
 const firstPlayerPawn: PawnProps = {
     pieceName: "pawn",
     isFirstPlayerPiece: true,
-    pieceImage: "",
+    pieceImage: "./src/img/Pawn_white.svg",
     position: null,
     moveRules: [forwardMove],
     move: () => {},
@@ -27,7 +27,7 @@ const firstPlayerPawn: PawnProps = {
 const firstPlayerRook: PieceProps = {
     pieceName: "rook",
     isFirstPlayerPiece: true,
-    pieceImage: "",
+    pieceImage: "./src/img/Rook_white.svg",
     position: null,
     moveRules: [linearMove],
     move: () => {},
@@ -36,7 +36,7 @@ const firstPlayerRook: PieceProps = {
 const firstPlayerKnight: PieceProps = {
     pieceName: "knight",
     isFirstPlayerPiece: true,
-    pieceImage: "",
+    pieceImage: "./src/img/Knight_white.svg",
     position: null,
     moveRules: [knightMovement],
     move: () => {},
@@ -45,7 +45,7 @@ const firstPlayerKnight: PieceProps = {
 const firstPlayerBishop: PieceProps = {
     pieceName: "bishop",
     isFirstPlayerPiece: true,
-    pieceImage: "",
+    pieceImage: "./src/img/Bishop_white.svg",
     position: null,
     moveRules: [diagonalMove],
     move: () => {},
@@ -54,7 +54,7 @@ const firstPlayerBishop: PieceProps = {
 const firstPlayerQueen: PieceProps = {
     pieceName: "queen",
     isFirstPlayerPiece: true,
-    pieceImage: "",
+    pieceImage: "./src/img/Queen_white.svg",
     position: null,
     moveRules: [linearMove,diagonalMove],
     move: () => {},
@@ -63,7 +63,7 @@ const firstPlayerQueen: PieceProps = {
 const firstPlayerKing: PieceProps = {
     pieceName: "king",
     isFirstPlayerPiece: true,
-    pieceImage: "",
+    pieceImage: "./src/img/King_white.svg",
     position: null,
     moveRules: [kingMovement],
     move: () => {},
@@ -73,7 +73,7 @@ const firstPlayerKing: PieceProps = {
 const secondPlayerPawn: PawnProps = {
     pieceName: "pawn",
     isFirstPlayerPiece: false,
-    pieceImage: "",
+    pieceImage: "./src/img/Pawn_black.svg",
     position: null,
     moveRules: [forwardMove],
     move: () => {},
@@ -83,7 +83,7 @@ const secondPlayerPawn: PawnProps = {
 const secondPlayerRook: PieceProps = {
     pieceName: "rook",
     isFirstPlayerPiece: false,
-    pieceImage: "",
+    pieceImage: "./src/img/Rook_black.svg",
     position: null,
     moveRules: [linearMove],
     move: () => {},
@@ -92,7 +92,7 @@ const secondPlayerRook: PieceProps = {
 const secondPlayerKnight: PieceProps = {
     pieceName: "knight",
     isFirstPlayerPiece: false,
-    pieceImage: "",
+    pieceImage: "./src/img/Knight_black.svg",
     position: null,
     moveRules: [knightMovement],
     move: () => {},
@@ -101,7 +101,7 @@ const secondPlayerKnight: PieceProps = {
 const secondPlayerBishop: PieceProps = {
     pieceName: "bishop",
     isFirstPlayerPiece: false,
-    pieceImage: "",
+    pieceImage: "./src/img/Bishop_black.svg",
     position: null,
     moveRules: [diagonalMove],
     move: () => {},
@@ -110,7 +110,7 @@ const secondPlayerBishop: PieceProps = {
 const secondPlayerQueen: PieceProps = {
     pieceName: "queen",
     isFirstPlayerPiece: false,
-    pieceImage: "",
+    pieceImage: "./src/img/Queen_black.svg",
     position: null,
     moveRules: [linearMove,diagonalMove],
     move: () => {},
@@ -119,7 +119,7 @@ const secondPlayerQueen: PieceProps = {
 const secondPlayerKing: PieceProps = {
     pieceName: "king",
     isFirstPlayerPiece: false,
-    pieceImage: "",
+    pieceImage: "./src/img/King_black.svg",
     position: null,
     moveRules: [kingMovement],
     move: () => {},
@@ -128,7 +128,7 @@ const secondPlayerKing: PieceProps = {
 const nonePiece: PieceProps = {
     pieceName: null,
     isFirstPlayerPiece: null,
-    pieceImage: "",
+    pieceImage: null,
     position: null,
     moveRules: [],
     move: () => {},

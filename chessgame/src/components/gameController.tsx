@@ -25,7 +25,9 @@ function gameController() {
     const [field, setfield] = useState<(PieceProps | PawnProps)[][]>(() => initializeField());
 
     function takePiece(filed:(PieceProps|PawnProps)[][],torow:number, tocolumn:number, fromrow:number, fromcolumn:number){
-        const newField = filed.map(row => [...row]);
+        const newField = filed.map(row =>
+            row.map(piece => ({...piece}))
+        );
         newField[torow][tocolumn] = nonePiece;
         [newField[fromrow][fromcolumn], newField[torow][tocolumn]] = [newField[torow][tocolumn],newField[fromrow][fromcolumn]];
     
@@ -33,7 +35,7 @@ function gameController() {
         
         if(newField[torow][tocolumn].pieceName == "pawn"){
             (newField[torow][tocolumn] as PawnProps).ismove = true
-            console.log("change")
+            console.log(`change ${torow} : ${tocolumn}`)
         }
 
         setfield(newField)

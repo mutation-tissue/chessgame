@@ -130,6 +130,14 @@ function forwardMove(field:(PieceProps|PawnProps)[][],row:number,column:number,i
         } else {
             return [];
         }
+
+        //駒をとることができる場合
+        for(let i of [1,-1]){
+            if(field[row+moveDirection][column+i].isFirstPlayerPiece === !isfirstPlayerTurn){
+                result.push({row: row+moveDirection,column: column+i});
+            }
+        }
+
     }catch{
         console.log("out of range");
         return [];

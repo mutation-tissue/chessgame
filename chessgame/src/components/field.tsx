@@ -20,7 +20,6 @@ function Field({ field,takePiece}: { field: (PieceProps|PawnProps)[][],takePiece
         setClickPosition(null);
         setMovablePosition(null);
 
-        
         setIsFirstPalyerTurn(!isFirstPlayerTurn)
     }
 
@@ -98,7 +97,8 @@ function FieldButton({
     return (
         <button
         onClick= {showclickedPlace}
-        className={`button ${isclicked ? 'selected' : ''} ${isMovablePosition? 'Movable' : ''}`}>{pieceProps.pieceName}
+        className={`button ${isclicked ? 'selected' : ''} ${isMovablePosition? 'Movable' : ''}`}>
+            {pieceProps.pieceImage !== null ?  <img src= {pieceProps.pieceImage!} alt="Button Image"></img> : null}
         </button>
     )
 }

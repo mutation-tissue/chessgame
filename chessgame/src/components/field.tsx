@@ -4,11 +4,10 @@ import { useState } from 'react';
 
 
 
-function Field({ field,takePiece}: { field: (PieceProps|PawnProps)[][],takePiece:Function}) {
+function Field({ field,takePiece,isfinish,isFirstPlayerTurn}: { field: (PieceProps|PawnProps)[][],takePiece:Function,isfinish:boolean,isFirstPlayerTurn:boolean}) {
 
     const [clickPosition,setClickPosition] = useState<{ row: number, column: number } | null>(null);
     const [movalePosition,setMovablePosition] = useState<{ row: number, column: number }[] | null>(null);
-    const [isFirstPlayerTurn, setIsFirstPalyerTurn] = useState<boolean>(true);
 
     
     function movePiece(row:number,column:number){
@@ -19,8 +18,6 @@ function Field({ field,takePiece}: { field: (PieceProps|PawnProps)[][],takePiece
         
         setClickPosition(null);
         setMovablePosition(null);
-
-        setIsFirstPalyerTurn(!isFirstPlayerTurn)
     }
 
     function showMovableFiled(moveRules:Function[], row:number,column:number){
@@ -46,12 +43,13 @@ function Field({ field,takePiece}: { field: (PieceProps|PawnProps)[][],takePiece
 
 
     return (
-        <div className="row">
+        <div className="row field">
             {field.map((piecelist, row) => {
                 return piecelist.map((piece,column) => {
                     const isclicked = clickPosition?.row === row && clickPosition?.column === column;
                     const isMovablePosition = movalePosition?.some(position => position.row === row && position.column === column) ?? false;
                     return <FieldButton 
+                        isfinish = {isfinish}
                         isclicked={isclicked}
                         isMovablePosition={isMovablePosition}
                         key={(row+1)*(column+1)}
@@ -68,6 +66,7 @@ function Field({ field,takePiece}: { field: (PieceProps|PawnProps)[][],takePiece
 }
 
 function FieldButton({
+    isfinish,
     isclicked,
     isMovablePosition,
     row,
@@ -76,6 +75,7 @@ function FieldButton({
     onmovePiece,
     showselected,
     }:{
+        isfinish: boolean,
         isclicked: boolean,
         isMovablePosition: boolean,
         row:number,
@@ -96,6 +96,7 @@ function FieldButton({
 
     return (
         <button
+        disabled = {isfinish}
         onClick= {showclickedPlace}
         className={`button ${isclicked ? 'selected' : ''} ${isMovablePosition? 'Movable' : ''}`}>
             {pieceProps.pieceImage !== null ?  <img src= {pieceProps.pieceImage!} alt="Button Image"></img> : null}
@@ -103,6 +104,13 @@ function FieldButton({
     )
 }
 
+function GameResult({winner}:{winner:string}){
+    return (
+        <div className = "result">
+            <p>this game winner : {winner}</p>
+        </div>
+    )
+}
 
 
-export {Field};
+export {Field,GameResult};

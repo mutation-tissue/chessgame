@@ -1,4 +1,4 @@
-import {Field} from './field.tsx';
+import {Field,GameResult} from './field.tsx';
 import SideMenu from './sideMenu.tsx';
 import {
     nonePiece,
@@ -23,20 +23,31 @@ import type {PawnProps, PieceProps} from '../types/piece'
 function gameController() {
     
     const [field, setfield] = useState<(PieceProps | PawnProps)[][]>(() => initializeField());
+    const [isfinish, setisfinish] = useState(false);
+    const [isfirstPlayerWin, setIsFirstPalyerWin] = useState<boolean | null>(null);
+    const [isfirstPlayerTurn, setIsFirstPlayerTurn] = useState<boolean>(true);
 
     function takePiece(filed:(PieceProps|PawnProps)[][],torow:number, tocolumn:number, fromrow:number, fromcolumn:number){
         const newField = filed.map(row =>
             row.map(piece => ({...piece}))
         );
+
+        //キングがとられるとゲームを終了させる。
+        if(newField[torow][tocolumn].pieceName === "king"){
+            console.log(`finish game! winner : ${newField[torow][tocolumn].isFirstPlayerPiece ? `second player(black)` : `first player(white)`}`)
+            setisfinish(true);
+            setIsFirstPalyerWin(newField[torow][tocolumn].isFirstPlayerPiece ? false : true)
+        }
+
         newField[torow][tocolumn] = nonePiece;
         [newField[fromrow][fromcolumn], newField[torow][tocolumn]] = [newField[torow][tocolumn],newField[fromrow][fromcolumn]];
     
-        console.log(`${newField[fromrow][fromcolumn].pieceName}, ${newField[torow][tocolumn].pieceName}`)
-        
         if(newField[torow][tocolumn].pieceName == "pawn"){
             (newField[torow][tocolumn] as PawnProps).ismove = true
             console.log(`change ${torow} : ${tocolumn}`)
         }
+
+        setIsFirstPlayerTurn(!isfirstPlayerTurn)
 
         setfield(newField)
     }
@@ -91,18 +102,30 @@ function gameController() {
     const handleInitialise = ()=>{
         const field = initializeField()
         setfield(field)
+        setisfinish(false)
+        setIsFirstPalyerWin(null)
+        setIsFirstPlayerTurn(true)
     }
 
     return(
-        <div className = "gameController">
+        <>
             <SideMenu 
                 initialize  = {handleInitialise}
             />
-            <Field
-                field = {field}
-                takePiece = {takePiece}
-            />
-        </div>
+            <div className = "gameController">
+                {isfinish && 
+                    <GameResult
+                    winner = {isfirstPlayerWin ? `first player(white)` : `second player(black)`}
+                    />
+                }
+                <Field
+                    field = {field}
+                    takePiece = {takePiece}
+                    isfinish = {isfinish}
+                    isFirstPlayerTurn = {isfirstPlayerTurn}
+                />
+            </div>
+        </>
     )
 }
 

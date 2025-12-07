@@ -1,5 +1,5 @@
 import './App.css'
-import GameController from './components/GameController'
+import GameController from './components/gameController'
 
 function App() {
   return (

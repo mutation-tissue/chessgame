@@ -122,21 +122,22 @@ function forwardMove(field:(PieceProps|PawnProps)[][],row:number,column:number,i
 
     console.log(ismove);
     try{
-        if (field[row+moveDirection][column].isFirstPlayerPiece === null){
-            result.push({row: row+moveDirection,column: column});
-            if(!ismove && field[row+moveDirection*2][column].isFirstPlayerPiece === null){
-                result.push({row: row+moveDirection*2,column: column});
-            }
-        } else {
-            return [];
-        }
-
         //駒をとることができる場合
         for(let i of [1,-1]){
             if(field[row+moveDirection][column+i].isFirstPlayerPiece === !isfirstPlayerTurn){
                 result.push({row: row+moveDirection,column: column+i});
             }
         }
+        
+        if (field[row+moveDirection][column].isFirstPlayerPiece === null){
+            result.push({row: row+moveDirection,column: column});
+            if(!ismove && field[row+moveDirection*2][column].isFirstPlayerPiece === null){
+                result.push({row: row+moveDirection*2,column: column});
+            }
+        } else {
+            return result;
+        }
+
 
     }catch{
         console.log("out of range");
